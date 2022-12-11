@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   post 'users' => 'users#create'
   resources :users, only: [:show, :edit, :update, :index]
   resources :books, only: [:new, :index, :show, :edit]
+  post 'books' => 'books#create'
 
 end
