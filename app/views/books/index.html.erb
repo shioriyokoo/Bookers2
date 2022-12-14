@@ -1,13 +1,16 @@
 <h1>Book detail</h1>
-<ul class="users">
   <% @books.each do |book| %>
-  <li>
-    <%= attachment_image_tag book, :book_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <%= book.title %>
-    <%= book.body %>
+  <div>
+    <%= link_to book_path(book.id) do %>
+      <%= image_tag book.get_image %>
+    <% end %>
+
+    <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+    <p><%= @book.user.name %></p>
+    <p><%= @book.title %></p>
+    <p><%= @book.body %></p>
     <%= link_to "Edit", edit_book_path(book) %>
     <%= link_to "Destroy", book_path(book), method: :delete %>
-  </li>
+  </div>
 
   <% end %>
-</ul>
