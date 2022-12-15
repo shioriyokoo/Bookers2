@@ -1,16 +1,41 @@
-<h1>Book detail</h1>
-  <% @books.each do |book| %>
-  <div>
-    <%= link_to book_path(book.id) do %>
-      <%= image_tag book.get_image %>
-    <% end %>
-
-    <p><%= image_tag book.user.get_profile_image(100,100) %></p>
-    <p><%= @book.user.name %></p>
-    <p><%= @book.title %></p>
-    <p><%= @book.body %></p>
-    <%= link_to "Edit", edit_book_path(book) %>
-    <%= link_to "Destroy", book_path(book), method: :delete %>
-  </div>
-
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
   <% end %>
+<% end %>
+
+<h1>User info</h1>
+<%= image_tag @user.get_profile_image %>
+<%= @user.name %>
+<%= @user.introduction %>
+
+<%= link_to "user_edit", edit_user_path(@user) %>
+
+<h1>New book</h1>
+
+<%= form_with model:@book, local:true do |f| %>
+
+<p>Title</p>
+<%= f.text_area :title %>
+
+<p>Opinion</p>
+<%= f.text_area :body %>
+
+<%= f.submit 'Create Book' %>
+
+<% end %>
+
+<h1>Books</h1>
+<% @books.each do |book| %>
+
+<%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClass %>
+<%= image_tag book.user.get_profile_image %>
+
+
+  <%= link_to book_path(book.id) do %>
+    <%= book.title %>
+<% end %>
+
+  <%= book.body %>
+<% end %>
