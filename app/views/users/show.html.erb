@@ -26,7 +26,7 @@
 
 <!-- ユーザーの投稿一覧 -->
 <h2>Books</h2>
-<% @book.each do |book| %>
+<% @books.each do |book| %>
 <div>
   <%= link_to book_path(book.id) do %>
     <%= image_tag book.get_image %>

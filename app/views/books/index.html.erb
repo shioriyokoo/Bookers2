@@ -1,18 +1,28 @@
 <% if @book.errors.any? %>
-  <%= @book.errors.count %>errors prohibited this obj from being saved:
-  <% @book.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@book.errors.count, "error") %> prohibited this being saved:</h2>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<h1>User info</h1>
-<%= image_tag @user.get_profile_image %>
-<%= @user.name %>
-<%= @user.introduction %>
+<div>
+  <h2>User info</h2>
 
-<%= link_to "user_edit", edit_user_path(@user) %>
+  <%= image_tag @user.get_profile_image(100,100) %>
 
-<h1>New book</h1>
+  <h3>name<%= @user.name %></h3>
+
+  <h4>introduction<%= @user.introduction %></h3>
+   <% if @user == current_user %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+</div>
+
+<h2>New book</h2>
 
 <%= form_with model:@book, local:true do |f| %>
 
@@ -26,16 +36,13 @@
 
 <% end %>
 
-<h1>Books</h1>
+<h2>Books</h2>
 <% @books.each do |book| %>
-
+<div>
 <%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClass %>
-<%= image_tag book.user.get_profile_image %>
 
-
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
-<% end %>
-
-  <%= book.body %>
+  <%= image_tag book.user.get_profile_image %>
+  <p><%= book.title %></p>
+  <p><%= book.body %></p>
+  </div>
 <% end %>
