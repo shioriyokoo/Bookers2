@@ -11,8 +11,6 @@ has_one_attached :profile_image
   validates :email, presence: true
   validates :password, presence: true
 
-   validates :introduction, presence: true
-
 
 def get_profile_image(width, height)
   unless profile_image.attached?

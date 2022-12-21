@@ -17,9 +17,7 @@
   <h3>name<%= @user.name %></h3>
 
   <h4>introduction<%= @user.introduction %></h3>
-   <% if @user == current_user %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
 </div>
 
 <h2>New book</h2>
@@ -39,10 +37,11 @@
 <h2>Books</h2>
 <% @books.each do |book| %>
 <div>
-<%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClass %>
 
-  <%= image_tag book.user.get_profile_image %>
-  <p><%= book.title %></p>
-  <p><%= book.body %></p>
+  <%= image_tag book.user.get_profile_image(100, 100) %>
+  <%= link_to book_path(book.id) do %>
+    <%= book.title %>
+  <% end %>
+  <%= book.body %>
   </div>
 <% end %>

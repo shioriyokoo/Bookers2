@@ -1,9 +1,25 @@
+<!-- ユーザーの詳細 -->
+<div>
+  <h2>User info</h2>
+
+  <%= image_tag @user.get_profile_image(100,100) %>
+
+  <h3>name<%= @user.name %></h3>
+
+  <h4>introduction<%= @user.introduction %></h3>
+
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+</div>
+
+<!-- 新規投稿 -->
+<%= render 'list', user: @user %>
+
 <!-- ユーザー一覧 -->
 <h1>Users</h1>
   <% @users.each do |user| %>
 <div>
-    <p>image<%= image_tag  user.get_profile_image(100, 100) %></p>
-    <p>name<% user.name %></p>
-    <%= link_to "show", user_path(user) %>
+    <%= image_tag  @user.get_profile_image(100, 100) %>
+    <%= user.name %>
+    <%= link_to "show", user_path(user.id) %>
 </div>
   <% end %>
