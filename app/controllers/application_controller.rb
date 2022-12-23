@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if current_user
-      flash[:notice] = "Signed in successfully."
+      flash[:success] = "Signed in successfully."
     user_path(resource)
     # @user = User.find(params[:id])
     # redirect_to user_path(@user.id)

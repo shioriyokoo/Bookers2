@@ -39,14 +39,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## 自己紹介文を保存するカラム
       t.string :introduction
       ## 画像を保存するカラム
-      t.string :profile_image
+      t.string :profile_image_id
 
 
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
-    add_index :users, :name,                unique: true
+    add_index :users, :name, unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
