@@ -1,16 +1,31 @@
-<!-- ユーザーの詳細 -->
-<div>
-  <h2>User info</h2>
+<main>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
 
-  <%= image_tag @book.user.get_profile_image(100,100) %>
-
-  <h3>name<%= @book.user.name %></h3>
-
-  <h4>introduction<%= @book.user.introduction %></h3>
-   <% if @book.user == current_user %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@book.user) %></p>
-  <% end %>
-</div>
+        <!-- ユーザーの詳細 -->
+        <h2>User info</h2>
+        <%= image_tag @book.user.get_profile_image(100,100) %>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @book.user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @book.user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <% if @book.user == current_user %>
+            <%= link_to edit_user_path(@book.user) do %>
+             <i class="fas fa-user-cog"></i>
+            <% end %>
+          <% end %>
+        </div>
 
 <h1>New book</h1>
 <%= form_with model: @book_new, local:true do |f| %>
@@ -38,7 +53,7 @@
   <%= @book.body %>
 
   <% if @book.user == current_user %>
-    <%= link_to "Edit", edit_book_path(@book), method: :edit %>
-    <%= link_to "Destroy", books_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %>
+    <%= link_to "Edit", edit_book_path(@book) %>
+    <%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"} %>
   <% end %>
 </div>

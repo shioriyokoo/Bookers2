@@ -1,48 +1,71 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <style type="text/css">
+      .turblinks-progress-bar {
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: #0076ff;
+        z_index: 9999;
+        transition: width 300ms ease-out, opacity 150ms ease-in;
+        transform: translate3d(0, 0, 0);
+      }
+    </style>
     <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
   <body>
-    <header>
+    <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <ul class="nav-list">
-      <% if user_signed_in? %>
-        <li class="nav-list-item">
-          <%= link_to "Home", user_path(id: current_user) %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "Users", users_path %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "Books", books_path %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li class="nav-list-item">
-          <%= link_to "Home", root_path %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "About", about_path %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "Sign up", new_user_registration_path %>
-        </li>
-        <li class="nav-list-item">
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
-      </ul>
-    </nav>
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <span>Bookers</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expand="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Home", user_path(id: current_user), class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Users", users_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Books", books_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path, class: 'nav-link text-light' %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <% if flash[:notice] %>
@@ -56,22 +79,20 @@
     <p id="notice"></p>
     <div class="container">
       <div class="row">
-        <div class="mx^auto col-11-sm-10 col-lg-8 col-xl-6">
+        <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
         </div>
       </div>
     </div>
     </main>
+
     <footer>
       <div class="container mt-5">
         <div class="row">
           <div class="mx-auto">
-            <p class="footer-text">CopyRight Infratop.inc</p>
+            <p>CopyRight Infratop.inc</p>
           </div>
         </div>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>

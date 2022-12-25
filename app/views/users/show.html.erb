@@ -1,28 +1,57 @@
-<!-- ユーザーの詳細 -->
-<div>
-  <h2>User info</h2>
+<main>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
 
-  <%= image_tag @user.get_profile_image(100,100) %>
-
-  <h3>name<%= @user.name %></h3>
-
-  <h4>introduction<%= @user.introduction %></h3>
-   <% if @user == current_user %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
-</div>
+        <!-- ユーザーの詳細 -->
+        <h2>User info</h2>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <% if @user == current_user %>
+            <%= link_to edit_user_path(@user) do %>
+             <i class="fas fa-user-cog"></i>
+            <% end %>
+          <% end %>
+        </div>
 
 <!-- 新規投稿 -->
 <%= render 'list', user: @user %>
 
 <!-- ユーザーの投稿一覧 -->
-<h2>Books</h2>
-<% @books.each do |book| %>
-<div>
-    <%= image_tag @user.get_profile_image(100,100) %>
-  <%= link_to book_path(book.id) do %>
-  <%= book.title %>
-  <% end %>
-  <%= book.body %>
-</div>
-<% end %>
+<div class="col-md-8 offset-md-1">
+  <h2>Books</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <% @books.each do |book| %>
+    <tbody>
+      <tr>
+        <th><%= image_tag @user.get_profile_image(100,100) %></th>
+        <th><%= link_to book_path(book.id) do %>
+        <%= book.title %>
+        <% end %></th>
+        <th><%= book.body %></th>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  </div>
