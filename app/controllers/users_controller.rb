@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_action :correct_user, only: [:edit, :update]
   def new
     @user = User.new
   end
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
     if @user == current_user
       render "edit"
     else
-      redirect_to users_path
+      redirect_to user_path(current_user)
     end
   end
 
